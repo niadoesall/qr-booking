@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book Delivery or Hauling</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="card">
+    <h1>Book Delivery or Hauling</h1>
+    <p class="sub">Scan → pick service → enter info → pay → done.</p>
+
+    <form id="booking-form">
+      <div class="row">
+        <label>Origin Store
+          <input id="store" name="store" placeholder="Auto-filled by QR">
+        </label>
+        <label class="hidden">Store ID
+          <input id="store_id" name="store_id" placeholder="OHT001">
+        </label>
+      </div>
+
+      <label>Service
+        <select id="service" name="service">
+          <option value="delivery">Delivery — $50</option>
+          <option value="delivery_haul">Delivery + Haul Away — $75</option>
+          <option value="hauling">Hauling — $125</option>
+        </select>
+      </label>
+
+      <div class="row">
+        <label>Preferred date
+          <input type="date" id="date" name="date" required>
+        </label>
+        <label>Preferred time
+          <input type="time" id="time" name="time" required>
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Name
+          <input id="name" name="name" required>
+        </label>
+        <label>Phone
+          <input id="phone" name="phone" required>
+        </label>
+      </div>
+
+      <label>Email
+        <input type="email" id="email" name="email" required>
+      </label>
+
+      <label>Pickup/Delivery address
+        <input id="address" name="address" required>
+      </label>
+
+      <label>Notes (optional)
+        <textarea id="notes" name="notes" rows="3" placeholder="Gate code, stairs, special items…"></textarea>
+      </label>
+
+      <div id="error" class="error" hidden></div>
+
+      <button type="submit" id="submit">Continue to payment</button>
+      <p class="tiny">Payment handled securely by Stripe.</p>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
