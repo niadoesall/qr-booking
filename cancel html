@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8">
+<title>Payment Canceled</title>
+<style>body{font-family:system-ui;margin:2rem;max-width:38rem}</style>
+<h1>Payment canceled</h1>
+<p>No worries. You can try again below.</p>
+<a href="./">Return to booking</a>
