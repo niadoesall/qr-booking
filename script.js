@@ -8,9 +8,8 @@ document.getElementById("store_id").value = storeId;
 
 // 2) replace THESE with your real Stripe Payment Links
 const STRIPE = {
-  delivery:       "https://buy.stripe.com/test_50_dollars_link",
-  delivery_haul:  "https://buy.stripe.com/test_75_dollars_link",
-  hauling:        "https://buy.stripe.com/test_125_dollars_link",
+  delivery:       "https://buy.stripe.com/test_8x228kcXNaojeZsaQ33Nm00",
+  delivery_haul:  "https://buy.stripe.com/test_3cI28kf5V1RNcRk3nB3Nm01",
 };
 
 const form = document.getElementById("booking-form");
