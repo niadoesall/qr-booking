@@ -1,0 +1,7 @@
+<!doctype html><meta charset="utf-8">
+<title>Booking Confirmed</title>
+<style>body{font-family:system-ui;margin:2rem;max-width:38rem}</style>
+<h1>✅ Thanks! Your booking is confirmed.</h1>
+<p>You’ll receive an email receipt from Stripe. We’ll text or email if anything changes.</p>
+<p>Need help? <a href="mailto:support@yourdomain.com">support@yourdomain.com</a></p>
+<a href="./">Back to booking</a>
