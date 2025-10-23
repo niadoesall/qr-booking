@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>Quote</title>
+<style>
+  body{font-family:Arial, sans-serif; padding:16px; max-width:560px; margin:auto}
+  label{display:block; margin:.75rem 0 .25rem} input,button{padding:.5rem; width:100%}
+  #result{margin-top:.75rem; font-weight:bold}
+  .row{display:grid; grid-template-columns:1fr; gap:.5rem}
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+</head><body>
+  <label>Store #</label>
+  <input id="storeNum" placeholder="e.g., 1001">
+
+  <label>Destination (full address)</label>
+  <input id="dest" placeholder="Street, City, State">
+
+  <button id="calcBtn">Get Quote</button>
+  <div id="result"></div>
+
+<script>
+const STORES = {
+  "1001":"201 NW Coveland St, Coupeville, WA",
+  "1002":"290 SE Pioneer Way, Oak Harbor, WA",
+  "1003":"1609 E Main St, Freeland, WA"
+}; // add more
+
+const FREE_MI = 5, BASE = 75, PER_MI = 2.00; // tweak pricing
+
+document.getElementById('calcBtn').onclick = () => calc();
+
+function calc(){
+  const s = document.getElementById('storeNum').value.trim();
+  const origin = STORES[s];
+  const dest = document.getElementById('dest').value.trim();
+  const out = document.getElementById('result');
+
+  if(!origin){ out.textContent = "Unknown store #."; return; }
+  if(!dest){ out.textContent = "Enter destination address."; return; }
+
+  const svc = new google.maps.DistanceMatrixService();
+  svc.getDistanceMatrix({
+    origins:[origin], destinations:[dest],
+    travelMode:'DRIVING', unitSystem:google.maps.UnitSystem.IMPERIAL
+  }, (res, status)=>{
+    if(status!=='OK'){ out.textContent = "Distance error."; return; }
+    const el = res.rows?.[0]?.elements?.[0];
+    if(!el || el.status!=='OK'){ out.textContent = "Route not found."; return; }
+    const miles = el.distance.value / 1609.344;
+    const price = BASE + Math.max(0, miles - FREE_MI)*PER_MI;
+
+    out.textContent = `${miles.toFixed(1)} mi — $${price.toFixed(2)}`;
+
+    // push price back to Jotform (hidden field listener in form)
+    if(window.parent?.postMessage){
+      window.parent.postMessage({quotePrice: price.toFixed(2), miles: miles.toFixed(1)}, "*");
+    }
+  });
+}
+</script>
+</body></html>
